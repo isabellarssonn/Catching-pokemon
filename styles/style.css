@@ -11,3 +11,10 @@ img {
     transition: all 3s linear;
 }
 
+.hide {
+    display: none;
+}
+
+#error {
+    color: red;
+}
