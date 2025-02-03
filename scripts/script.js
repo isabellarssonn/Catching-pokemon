@@ -2,6 +2,7 @@ const log = (msg) => console.log(msg);
 
 // I denna fil skriver ni all er kod
 let activePokemons = []
+getPokemons()
 
 //Form validation
 let formRef = document.querySelector('#form');
@@ -81,5 +82,27 @@ function shuffleArray(array) {
     }
 }
 
+// Place 10 Pokémon on game field
+function populateField() {
 
-getPokemons()
+    for (let i = 0; i < 10; i++) {
+        let newPokemon = document.createElement("img")
+        console.log(newPokemon);
+        let pokemon = activePokemons[i]
+        
+        newPokemon.id = pokemon.idCss
+        newPokemon.src = pokemon.imageUrl
+
+        console.log(newPokemon);
+
+        let gameFieldRef = document.querySelector("#gameField")
+        gameFieldRef.appendChild(newPokemon)
+    }
+    
+}
+
+populateField()
+
+
+
+
