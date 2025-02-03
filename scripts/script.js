@@ -1,108 +1,118 @@
 const log = (msg) => console.log(msg);
 
 // I denna fil skriver ni all er kod
-let activePokemons = []
-getPokemons()
+let activePokemons = [];
+getPokemons();
 
 //Form validation
-let formRef = document.querySelector('#form');
-formRef.addEventListener('submit', (event) => {
-    event.preventDefault()
-    if (validateLogin()) {
-        console.log('Formuläret skickades');
-        formRef.classList.add('hide');
-    }
-})
+let formRef = document.querySelector("#form");
+formRef.addEventListener("submit", (event) => {
+  event.preventDefault();
+  if (validateLogin()) {
+    console.log("Formuläret skickades");
+    startTimer();
+    formRef.classList.add("hide");
+  }
+});
 
 // Form validation function
 function validateLogin() {
-    let nickRef = document.querySelector('#nick').value;
-    let ageRef = document.querySelector('#age').value;
-    let boyRef = document.querySelector('#boy');
-    let girlRef = document.querySelector('#girl');
+  let nickRef = document.querySelector("#nick").value;
+  let ageRef = document.querySelector("#age").value;
+  let boyRef = document.querySelector("#boy");
+  let girlRef = document.querySelector("#girl");
 
-    try {
-        if (nickRef.length <= 5 || nickRef.length >= 10) {
-            throw new Error('Namnet måste vara mellan 5 och 10 tecken långt.');
-        } else if (ageRef < 10 || ageRef > 15) {
-            throw new Error('Åldern måste vara mellan 10 och 15 år.');
-        } else if (!boyRef.checked && !girlRef.checked) {
-            throw new Error('Ett av alternativen måste vara ikryssat.')
-        }
-
-    } catch(error) {
-        let errorRef = document.querySelector('#error');
-        errorRef.textContent = error.message
-        console.log(error.message);
-        return false
+  try {
+    if (nickRef.length <= 5 || nickRef.length >= 10) {
+      throw new Error("Namnet måste vara mellan 5 och 10 tecken långt.");
+    } else if (ageRef < 10 || ageRef > 15) {
+      throw new Error("Åldern måste vara mellan 10 och 15 år.");
+    } else if (!boyRef.checked && !girlRef.checked) {
+      throw new Error("Ett av alternativen måste vara ikryssat.");
     }
-    return true
+  } catch (error) {
+    let errorRef = document.querySelector("#error");
+    errorRef.textContent = error.message;
+    console.log(error.message);
+    return false;
+  }
+  return true;
 }
 
 // Slumpa 10 random pokémon
 function getPokemons() {
+  let pokemonNumbers = [];
 
-    let pokemonNumbers = []
+  for (let i = 1; i <= 151; i++) {
+    pokemonNumbers.push(i.toString());
+  }
 
-    for (let i = 1; i <= 151; i++) {
-        pokemonNumbers.push(i.toString()) 
+  pokemonNumbers = pokemonNumbers.map((number) => {
+    if (number.length === 1) {
+      return `00${number}`;
+    } else if (number.length === 2) {
+      return `0${number}`;
+    } else {
+      return number;
     }
-    
-    pokemonNumbers = pokemonNumbers.map((number) => {
-        if (number.length === 1) {
-            return `00${number}`
-        } else if (number.length === 2){
-            return `0${number}`
-        } else {
-            return number
-        }
-    })
+  });
 
-    shuffleArray(pokemonNumbers)
+  shuffleArray(pokemonNumbers);
 
-    let randomPokemonNumbers = pokemonNumbers.slice(0, 10)
+  let randomPokemonNumbers = pokemonNumbers.slice(0, 10);
 
-    console.log(randomPokemonNumbers);
+  console.log(randomPokemonNumbers);
 
-    activePokemons = randomPokemonNumbers.map(number => ({
-        idCss: `poke${number}`,
-        imageUrl: `/assets/pokemons/${number.toString()}.png`,
-        ballImg: `/assets/ball.webp`
-    }))
+  activePokemons = randomPokemonNumbers.map((number) => ({
+    idCss: `poke${number}`,
+    imageUrl: `/assets/pokemons/${number.toString()}.png`,
+    ballImg: `/assets/ball.webp`,
+  }));
 
-    console.log(activePokemons);
-    
+  console.log(activePokemons);
 }
 
 // Funktion för att blanda en array (Fisher-Yates shuffle)
 function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
+  for (let i = array.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
 }
 
 // Place 10 Pokémon on game field
 function populateField() {
+  startTimer();
+  for (let i = 0; i < 10; i++) {
+    let newPokemon = document.createElement("img");
+    console.log(newPokemon);
+    let pokemon = activePokemons[i];
 
-    for (let i = 0; i < 10; i++) {
-        let newPokemon = document.createElement("img")
-        console.log(newPokemon);
-        let pokemon = activePokemons[i]
-        
-        newPokemon.id = pokemon.idCss
-        newPokemon.src = pokemon.imageUrl
+    newPokemon.id = pokemon.idCss;
+    newPokemon.src = pokemon.imageUrl;
 
-        console.log(newPokemon);
+    console.log(newPokemon);
 
-        let gameFieldRef = document.querySelector("#gameField")
-        gameFieldRef.appendChild(newPokemon)
-    }
-    
+    let gameFieldRef = document.querySelector("#gameField");
+    gameFieldRef.appendChild(newPokemon);
+  }
+  stopTimer();
 }
 
-populateField()
+// Timer
+let timer;
+let counter = 0;
 
+populateField();
 
+function startTimer() {
+  oGameData.endTime = setInterval(() => {
+    console.log("Counter: " + counter);
+    return counter++;
+  }, 1);
+}
 
-
+function stopTimer() {
+  clearInterval(oGameData.endTime);
+  console.log("Counter: " + oGameData.endTime);
+}
