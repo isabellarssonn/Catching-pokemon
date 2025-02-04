@@ -1,6 +1,17 @@
 const log = (msg) => console.log(msg);
+//gömmer highscore tabellen vid start
+let scoreTable = document.querySelector("#highScore");
+scoreTable.classList.add("hide");
 
-// I denna fil skriver ni all er kod
+// Moq data för att testa highscore
+localStorage.clear();
+localStorage.setItem("Ash", 25);
+localStorage.setItem("Brock", 20);
+localStorage.setItem("Misty", 30);
+localStorage.setItem("Jessie", 40);
+localStorage.setItem("Pikachu", 22);
+
+// I denna fil skriver ni all er kod för spelet
 let activePokemons = [];
 getPokemons();
 
@@ -82,8 +93,9 @@ function shuffleArray(array) {
 
 // Place 10 Pokémon on game field
 function populateField() {
-  startTimer();
   for (let i = 0; i < 10; i++) {
+    startTimer();
+    showHighScore();
     let newPokemon = document.createElement("img");
     console.log(newPokemon);
     let pokemon = activePokemons[i];
@@ -98,7 +110,6 @@ function populateField() {
   }
   stopTimer();
 }
-
 // Timer
 let timer;
 let counter = 0;
@@ -115,4 +126,24 @@ function startTimer() {
 function stopTimer() {
   clearInterval(oGameData.endTime);
   console.log("Counter: " + oGameData.endTime);
+}
+
+//sparar namn och tid i localstorage
+function saveScore() {
+  localStorage.setItem(oGameData.trainerName, oGameData.endTime);
+}
+//visar highscore
+function showHighscore() {
+  let scoreTable = document.querySelector("#highscoreList");
+  let highscore = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    highscore.push({
+      name: localStorage.key(i),
+      time: localStorage.getItem(localStorage.key(i)),
+    });
+    highscore.sort((a, b) => a.time - b.time);
+    scoreTable.innerHTML = highscore
+      .map((player) => `<li>${player.name}: ${player.time}</li>`)
+      .join("");
+  }
 }
