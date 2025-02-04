@@ -115,6 +115,7 @@ let timer;
 let counter = 0;
 
 populateField();
+
 function startTimer() {
   oGameData.endTime = setInterval(() => {
     console.log("Counter: " + counter);
