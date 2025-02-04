@@ -14,6 +14,7 @@ localStorage.setItem("Pikachu", 22);
 // I denna fil skriver ni all er kod för spelet
 let activePokemons = [];
 getPokemons();
+populateField();
 
 //Form validation
 let formRef = document.querySelector("#form");
@@ -94,14 +95,15 @@ function shuffleArray(array) {
 // Place 10 Pokémon on game field
 function populateField() {
   for (let i = 0; i < 10; i++) {
-    startTimer();
-    showHighScore();
+    
     let newPokemon = document.createElement("img");
     console.log(newPokemon);
     let pokemon = activePokemons[i];
 
     newPokemon.id = pokemon.idCss;
     newPokemon.src = pokemon.imageUrl;
+    newPokemon.style.left = `${oGameData.getLeftPosition()}px`
+    newPokemon.style.top = `${oGameData.getTopPosition()}px`
 
     console.log(newPokemon);
 
@@ -110,11 +112,10 @@ function populateField() {
   }
   stopTimer();
 }
+
 // Timer
 let timer;
 let counter = 0;
-
-populateField();
 
 function startTimer() {
   oGameData.endTime = setInterval(() => {
