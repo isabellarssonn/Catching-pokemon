@@ -113,6 +113,16 @@ function populateField() {
   stopTimer();
 }
 
+function randomPosition(pokemonId) {
+  let pokemonRef = document.querySelector("#"+pokemonId)
+  pokemonRef.style.left = `${oGameData.getLeftPosition()}px`
+  pokemonRef.style.top = `${oGameData.getTopPosition()}px`
+}
+
+setInterval(() => {
+  activePokemons.forEach(pokemon => randomPosition(pokemon.idCss));
+}, 3000);
+
 // Timer
 let timer;
 let counter = 0;
