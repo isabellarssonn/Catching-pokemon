@@ -93,9 +93,9 @@ function shuffleArray(array) {
 
 // Place 10 Pokémon on game field
 function populateField() {
+  startTimer();
+  showHighscore();
   for (let i = 0; i < 10; i++) {
-    startTimer();
-    showHighScore();
     let newPokemon = document.createElement("img");
     console.log(newPokemon);
     let pokemon = activePokemons[i];
@@ -120,7 +120,7 @@ function startTimer() {
   oGameData.endTime = setInterval(() => {
     console.log("Counter: " + counter);
     return counter++;
-  }, 1);
+  }, 1000);
 }
 
 function stopTimer() {
