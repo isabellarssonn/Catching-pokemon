@@ -109,6 +109,7 @@ function populateField() {
 
     let gameFieldRef = document.querySelector("#gameField");
     gameFieldRef.appendChild(newPokemon);
+    newPokemon.addEventListener('mouseover', () => handleHover(newPokemon, pokemon));
   }
   stopTimer();
 }
@@ -157,4 +158,21 @@ function showHighscore() {
       .map((player) => `<li>${player.name}: ${player.time}</li>`)
       .join("");
   }
+}
+
+function handleHover(pokemonElement, pokemonData) {
+    if (!pokemonData.caught) {
+        pokemonElement.src = pokemonData.ballImg;  // byter til Pokéboll-bild
+        pokemonData.caught = true;                 // bockar i att den är fången
+
+        // event för att låta Pokémon rymma när man hovrar över bollen
+        pokemonElement.addEventListener('mouseover', () => handleEscape(pokemonElement, pokemonData), { once: true });
+    }
+}
+
+function handleEscape(pokemonElement, pokemonData) {
+    pokemonElement.src = pokemonData.imageUrl;    // tillbaka till pokemon bilden
+    pokemonData.caught = false;                   // bockar i att den ej är fången
+
+    randomPosition(pokemonElement.id);            // Pokémon får en nu position och röra sig mot 
 }
