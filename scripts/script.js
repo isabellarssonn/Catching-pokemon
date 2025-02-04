@@ -11,7 +11,7 @@ localStorage.setItem("Misty", 30);
 localStorage.setItem("Jessie", 40);
 localStorage.setItem("Pikachu", 22);
 
-// I denna fil skriver ni all er kod
+// I denna fil skriver ni all er kod för spelet
 let activePokemons = [];
 getPokemons();
 
@@ -21,6 +21,7 @@ formRef.addEventListener("submit", (event) => {
   event.preventDefault();
   if (validateLogin()) {
     console.log("Formuläret skickades");
+    startTimer();
     formRef.classList.add("hide");
   }
 });
@@ -92,8 +93,9 @@ function shuffleArray(array) {
 
 // Place 10 Pokémon on game field
 function populateField() {
-  showHighscore();
   for (let i = 0; i < 10; i++) {
+    startTimer();
+    showHighScore();
     let newPokemon = document.createElement("img");
     console.log(newPokemon);
     let pokemon = activePokemons[i];
@@ -106,9 +108,25 @@ function populateField() {
     let gameFieldRef = document.querySelector("#gameField");
     gameFieldRef.appendChild(newPokemon);
   }
+  stopTimer();
 }
+// Timer
+let timer;
+let counter = 0;
 
 populateField();
+function startTimer() {
+  oGameData.endTime = setInterval(() => {
+    console.log("Counter: " + counter);
+    return counter++;
+  }, 1);
+}
+
+function stopTimer() {
+  clearInterval(oGameData.endTime);
+  console.log("Counter: " + oGameData.endTime);
+}
+
 //sparar namn och tid i localstorage
 function saveScore() {
   localStorage.setItem(oGameData.trainerName, oGameData.endTime);
