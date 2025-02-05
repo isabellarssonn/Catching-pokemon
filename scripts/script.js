@@ -6,39 +6,6 @@ let formRef = document.querySelector("#form")
 let pokemonFieldRef = document.querySelector("#pokemonField")
 let highScoreRef = document.querySelector("#highScore")
 
-getPokemons()
-populateField()
-
-document.querySelectorAll("#pokemonField img").forEach(pokemon => {
-    pokemon.addEventListener("mouseenter", () => {
-        
-        if (pokemon.src.includes("png")){
-            pokemon.src = pokemon.dataset.ballImg
-            let foundPokemon = oGameData.pokemonNumbers.find(p => p.idCSS === pokemon.id)
-            if (foundPokemon) {
-                foundPokemon.free = false
-                oGameData.nmbrOfCaughtPokemons++    
-            }
-        } else {
-            pokemon.src = pokemon.dataset.defaultImg
-            let releasedPokemon = oGameData.pokemonNumbers.find(p => p.idCSS === pokemon.id)
-            if (releasedPokemon) {
-                releasedPokemon.free = true
-                oGameData.nmbrOfCaughtPokemons-- 
-            }
-        }
-        if (oGameData.pokemonNumbers.every(p => p.free === false)){
-            pokemonFieldRef.classList.add("hide")
-            highScoreRef.classList.remove("hide")
-            oGameData.endTimeInMilliseconds();
-            let elapsedTime = oGameData.nmbrOfMilliseconds();
-            console.log("Tid för att fånga alla Pokémon: " + elapsedTime + " ms")
-            saveScore()
-            showHighscore()
-        }
-    })
-})
-
 formRef.addEventListener("submit", (event) => {
     
     event.preventDefault()
@@ -48,6 +15,8 @@ formRef.addEventListener("submit", (event) => {
         pokemonFieldRef.classList.remove("hide")
         console.log("Vidare till spelplanen")
         oGameData.startTimeInMilliseconds();
+        
+        startGame()
     }
 
 }) 
@@ -84,6 +53,47 @@ if (boyRef.checked) {
     
 return true
 }
+
+// Spelet
+function startGame() {
+
+    getPokemons()
+    populateField()    
+    
+    setInterval(() => {
+        oGameData.pokemonNumbers.forEach(pokemon => randomPosition(pokemon.idCSS));
+    }, 3000);
+    
+    document.querySelectorAll("#pokemonField img").forEach(pokemon => {
+        pokemon.addEventListener("mouseenter", () => {
+            
+            if (pokemon.src.includes("png")){
+                pokemon.src = pokemon.dataset.ballImg
+                let foundPokemon = oGameData.pokemonNumbers.find(p => p.idCSS === pokemon.id)
+                if (foundPokemon) {
+                    foundPokemon.free = false
+                    oGameData.nmbrOfCaughtPokemons++    
+                }
+            } else {
+                pokemon.src = pokemon.dataset.defaultImg
+                let releasedPokemon = oGameData.pokemonNumbers.find(p => p.idCSS === pokemon.id)
+                if (releasedPokemon) {
+                    releasedPokemon.free = true
+                    oGameData.nmbrOfCaughtPokemons-- 
+                }
+            }
+            if (oGameData.pokemonNumbers.every(p => p.free === false)){
+                pokemonFieldRef.classList.add("hide")
+                highScoreRef.classList.remove("hide")
+                oGameData.endTimeInMilliseconds();
+                let elapsedTime = oGameData.nmbrOfMilliseconds();
+                console.log("Tid för att fånga alla Pokémon: " + elapsedTime + " ms")
+                saveScore()
+                showHighscore()
+            }
+        })
+    }) 
+    }
 
 // Skapar en array med 10 slumpade pokémon
 function getPokemons() {
@@ -144,11 +154,6 @@ function randomPosition(pokemonId) {
     pokemonRef.style.top = `${oGameData.getTopPosition()}px`
 }
 
-// randomPosition körs var tredje sekund
-setInterval(() => {
-    oGameData.pokemonNumbers.forEach(pokemon => randomPosition(pokemon.idCSS));
-}, 3000);
-
 // Funktion för att blanda en array (Fisher-Yates shuffle)
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -162,12 +167,13 @@ function saveScore() {
     let elapsedTime = oGameData.nmbrOfMilliseconds();
     localStorage.setItem(oGameData.trainerName, elapsedTime);
   }
-  //visar highscore
-  function showHighscore() {
+  
+//visar highscore
+function showHighscore() {
     let scoreTable = document.querySelector("#highscoreList");
     let highscore = [];
-    for (let i = 0; i < localStorage.length; i++) {
-      highscore.push({
+        for (let i = 0; i < localStorage.length; i++) {
+        highscore.push({
         name: localStorage.key(i),
         time: localStorage.getItem(localStorage.key(i)),
       });
@@ -177,3 +183,14 @@ function saveScore() {
         .join("");
     }
   }
+
+
+// Startar om
+let restartRef = document.querySelector("#playAgainBtn")
+
+restartRef.addEventListener("click", () => {
+    oGameData.init()
+    pokemonFieldRef.innerHTML = ""
+    highScoreRef.classList.add("hide")
+    formRef.classList.remove("hide")
+})
