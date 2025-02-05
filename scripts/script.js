@@ -1,4 +1,5 @@
 const log = (msg) => console.log(msg);
+const backgroundMusic = document.querySelector("#backgroundMusic")
 
 // I denna fil skriver ni all er kod
 
@@ -19,6 +20,7 @@ formRef.addEventListener("submit", (event) => {
         let backgroundRef = document.querySelector("#background")
         backgroundRef.src = "/assets/arena-background.png"
         startGame()
+        backgroundMusic.play();
     }
 
 }) 
@@ -87,6 +89,7 @@ function startGame() {
             }
             if (oGameData.pokemonNumbers.every(p => p.free === false)){
                 pokemonFieldRef.classList.add("hide")
+                highScoreRef.style.display = "flex"
                 highScoreRef.classList.remove("hide")
                 oGameData.endTimeInMilliseconds();
                 let elapsedTime = oGameData.nmbrOfMilliseconds();
@@ -195,7 +198,12 @@ restartRef.addEventListener("click", () => {
     oGameData.init()
     pokemonFieldRef.innerHTML = ""
     highScoreRef.classList.add("hide")
+    highScoreRef.style.display = "none"
     formRef.classList.remove("hide")
+    document.querySelector("#background").src= "/assets/background.png"
     let backgroundRef = document.querySelector("#background")
     backgroundRef.src = "/assets/background.png"
+    backgroundMusic.pause(); // Pausar musiken
+backgroundMusic.currentTime = 0; // Startar om från början
+
 })

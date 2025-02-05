@@ -49,6 +49,7 @@
         </section>
     
         <section class="high-score d-none hide" id="highScore">
+          <div class="black-band"></div>
             <h1>Congratulations!</h1>
             <h3 id="winMsg"></h3>
             <ol class="highscore-list" id="highscoreList">
@@ -59,6 +60,6 @@
     </section>
     
     <!-- Läs in audioelementet från DOMen. För att spela .play(), för att pausa .pause(), för att starta om .load()  -->
-    <audio src="./assets/pokemon_vs_trainer.mp3"></audio>
+    <audio id="backgroundMusic" src="./assets/pokemon_vs_trainer.mp3"></audio>
   </body>
 </html>
