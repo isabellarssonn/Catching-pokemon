@@ -15,7 +15,9 @@ formRef.addEventListener("submit", (event) => {
         pokemonFieldRef.classList.remove("hide")
         console.log("Vidare till spelplanen")
         oGameData.startTimeInMilliseconds();
-        
+        document.querySelector("#errormsg").classList.add("hide")
+        let backgroundRef = document.querySelector("#background")
+        backgroundRef.src = "/assets/arena-background.png"
         startGame()
     }
 
@@ -39,6 +41,7 @@ let girlRef = document.querySelector("#girl")
         }
 
     } catch(error) {
+        document.querySelector("#errormsg").classList.remove("hide")
         document.querySelector("#errormsg").textContent = error.message
         return false    
     }
@@ -193,4 +196,6 @@ restartRef.addEventListener("click", () => {
     pokemonFieldRef.innerHTML = ""
     highScoreRef.classList.add("hide")
     formRef.classList.remove("hide")
+    let backgroundRef = document.querySelector("#background")
+    backgroundRef.src = "/assets/background.png"
 })

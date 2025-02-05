@@ -8,13 +8,15 @@
 /* NÃ¤r ni sÃ¤tter intervallen efter vilken pokemonen fÃ¥r sin nya position bÃ¶r den intervallen Ã¶verensstÃ¤mma med tiden hÃ¤r. 3s. */
 .imgbackground {
     width: 100vw;
+    height: 100vh;
+    position: absolute;
+    object-fit: cover;
 }
 
-img {
+.game-field img {
     width: 300px;
     transition: all 3s linear;
-    position: absolute;
-    
+    position: absolute;   
 }
 
 .form-wrapper {
@@ -25,6 +27,17 @@ img {
     height: 100vh;
 }
 
+#errormsg {
+    position: absolute;
+    z-index: 10;
+    background-color: antiquewhite;
+    padding: 1em;
+    top: 3em;
+    font-family: verdana;
+    border-radius: 2em;
+    color: white;
+    background-color: rgb(221, 59, 51);
+}
 
 
 .form {
