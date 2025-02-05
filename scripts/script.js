@@ -1,6 +1,6 @@
 const log = (msg) => console.log(msg);
 const backgroundMusic = document.querySelector("#backgroundMusic");
-
+localStorage.clear();
 // I denna fil skriver ni all er kod
 
 let formRef = document.querySelector("#form");
@@ -190,16 +190,18 @@ function saveScore() {
 function showHighscore() {
   let scoreTable = document.querySelector("#highscoreList");
   let highscore = [];
-  // Loopar igenom localstorage och lägger till namn och tid i highscore arrayen men hoppar över de tre första som är systemets egna
-  for (let i = 3; i < localStorage.length; i++) {
-    highscore.push({
-      name: localStorage.key(i),
-      time: localStorage.getItem(localStorage.key(i)),
-    });
-    highscore.sort((a, b) => a.time - b.time);
-    scoreTable.innerHTML = highscore
-      .map((player) => `<li>${player.name}: ${player.time}</li>`)
-      .join("");
+  // Loopar igenom localstorage och lägger till namn och tid i highscore arrayen men hoppar över de som key är mindre än 5 och större än 10
+  for (let i = 0; i < localStorage.length; i++) {
+    if (localStorage.key(i).length > 5 && localStorage.key(i).length < 10) {
+      highscore.push({
+        name: localStorage.key(i),
+        time: localStorage.getItem(localStorage.key(i)),
+      });
+      highscore.sort((a, b) => a.time - b.time);
+      scoreTable.innerHTML = highscore
+        .map((player) => `<li>${player.name}: ${player.time}</li>`)
+        .join("");
+    }
   }
 }
 
