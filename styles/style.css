@@ -6,6 +6,10 @@
 
 /* Ser till sÃ¥ att bilderna fÃ¥r korrekt storlek och deras rÃ¶relse animeras */
 /* NÃ¤r ni sÃ¤tter intervallen efter vilken pokemonen fÃ¥r sin nya position bÃ¶r den intervallen Ã¶verensstÃ¤mma med tiden hÃ¤r. 3s. */
+.imgbackground {
+    width: 100vw;
+}
+
 img {
     width: 300px;
     transition: all 3s linear;
@@ -17,47 +21,95 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    height: 100vh;
 }
 
+
+
 .form {
-    margin-top: 10em;
-    max-width: 600px;
-    display: flex;
-    padding: 2em;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    color: blue;
-    border: 5px solid blue;
-    border-radius: 20px;
-    text-decoration: outline;
+    margin: 0 auto;
+    height: 550px;
+    width: 550px;
+    background: linear-gradient(0deg, rgb(196, 196, 196) 0%, rgb(255, 255, 255) 50%, rgb(221, 59, 51) 50%);
+    border-radius: 50%;
+    border: 6px solid black;
+    padding: 3rem;
+    gap: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
 }
+
+.form::before {
+    content: "";
+    position: absolute;      
+    width: 550px;
+    top: 50%;
+    left: 0;
+    height: 40px;    
+    background-color: black;
+  }
 
 .form h1 {
     font-family: "shantell sans";
-    color: yellow; /* FyllningsfÃ¤rg */
+    color: rgb(255, 255, 255); /* FyllningsfÃ¤rg */
     text-shadow: 
-        -2px -2px 0 blue,  
-         2px -2px 0 blue,  
-        -2px  2px 0 blue,  
-         2px  2px 0 blue; /* Skapar en kontur */
+        -2px -2px 0 rgb(0, 0, 0),  
+         2px -2px 0 rgb(0, 0, 0),  
+        -2px  2px 0 rgb(0, 0, 0),  
+         2px  2px 0 rgb(0, 0, 0); /* Skapar en kontur */
     font-weight: bold; /* FÃ¶r att gÃ¶ra texten tydligare */
-    font-size: 2.4em;
+    font-size: 2.2em;
     text-align: center;
     font-weight: bold;
     text-transform: uppercase;
+    margin-top: 1.6rem;
 }
 
 .form h2 {
     font-family: "shantell sans";
+    font-size: 1.4em;
+    margin-top: 1rem;
+}
+
+#nick {
+    height: 2rem;
+    margin-right: 0.5rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+#nicktext {
+    margin-bottom: 1rem;
+}
+
+#gender {
+    margin-top: 2rem;
+}
+
+#age {
+    height: 2rem;
+    margin-left: 0.5rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+}
+
+#boy {
+    margin-top: 1rem;
 }
 
 .form button {
-    background-color: blue;
+    background-color: rgb(255, 236, 66);
     padding: 1em;
     font-family: "shantell sans";
     font-size: 1em;
-    color: white;
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
 }
 
 .form-sections {
@@ -67,3 +119,7 @@ img {
 .hide {
     display: none;
 }
+
+
+
+
