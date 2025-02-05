@@ -93,8 +93,6 @@ function shuffleArray(array) {
 
 // Place 10 Pokémon on game field
 function populateField() {
-  startTimer();
-  showHighscore();
   for (let i = 0; i < 10; i++) {
     let newPokemon = document.createElement("img");
     console.log(newPokemon);
