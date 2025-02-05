@@ -1,6 +1,6 @@
 const log = (msg) => console.log(msg);
 const backgroundMusic = document.querySelector("#backgroundMusic");
-localStorage.clear();
+
 // I denna fil skriver ni all er kod
 
 let formRef = document.querySelector("#form");
