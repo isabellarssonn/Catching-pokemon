@@ -204,6 +204,13 @@ restartRef.addEventListener("click", () => {
     let backgroundRef = document.querySelector("#background")
     backgroundRef.src = "/assets/background.png"
     backgroundMusic.pause(); // Pausar musiken
-backgroundMusic.currentTime = 0; // Startar om från början
-
+    backgroundMusic.currentTime = 0; // Startar om från början
+    let nickRef = document.querySelector("#nick")
+    let ageRef = document.querySelector("#age")
+    let boyRef = document.querySelector("#boy")
+    let girlRef = document.querySelector("#girl")
+    nickRef.value = ""
+    ageRef.value = ""
+    boyRef.checked = false
+    girlRef.checked = false
 })
