@@ -192,7 +192,7 @@ function showHighscore() {
   let highscore = [];
   // Loopar igenom localstorage och lägger till namn och tid i highscore arrayen men hoppar över de som key är mindre än 5 och större än 10
   for (let i = 0; i < localStorage.length; i++) {
-    if (localStorage.key(i).length > 5 && localStorage.key(i).length < 10) {
+    if (localStorage.key(i).length > 4 && localStorage.key(i).length < 11) {
       highscore.push({
         name: localStorage.key(i),
         time: localStorage.getItem(localStorage.key(i)),
