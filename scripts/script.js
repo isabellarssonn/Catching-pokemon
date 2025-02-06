@@ -1,12 +1,13 @@
 const log = (msg) => console.log(msg);
+
+// Globala variabler
 const backgroundMusic = document.querySelector("#backgroundMusic")
-
-// I denna fil skriver ni all er kod
-
 let formRef = document.querySelector("#form")
 let pokemonFieldRef = document.querySelector("#pokemonField")
 let highScoreRef = document.querySelector("#highScore")
 
+
+// Om valideringen returnerar true så startas spelet
 formRef.addEventListener("submit", (event) => {
     
     event.preventDefault()
@@ -14,7 +15,6 @@ formRef.addEventListener("submit", (event) => {
     if(validateLogin()) {
         formRef.classList.add("hide")
         pokemonFieldRef.classList.remove("hide")
-        console.log("Vidare till spelplanen")
         oGameData.startTimeInMilliseconds();
         document.querySelector("#errormsg").classList.add("hide")
         let backgroundRef = document.querySelector("#background")
@@ -25,6 +25,7 @@ formRef.addEventListener("submit", (event) => {
 
 }) 
 
+// Validering av formulär
 function validateLogin() {
 
 let nickRef = document.querySelector("#nick").value
@@ -101,7 +102,7 @@ function startGame() {
     }) 
     }
 
-// Skapar en array med 10 slumpade pokémon
+// Fyller listan med 10 slumpade pokémon och tilldelar värden som används i spelet
 function getPokemons() {
     
     let allPokemonNumbers = []
@@ -135,7 +136,7 @@ function getPokemons() {
     
 }
 
-// Sätter 10 Pokémon på spelplanen
+// Sätter 10 Pokémon på spelplanen (DOM-manipulation)
 function populateField() {
     
     for (let i = 0; i < 10; i++) {
@@ -190,7 +191,6 @@ function showHighscore() {
     }
   }
 
-
 // Startar om
 let restartRef = document.querySelector("#playAgainBtn")
 
@@ -201,10 +201,8 @@ restartRef.addEventListener("click", () => {
     highScoreRef.style.display = "none"
     formRef.classList.remove("hide")
     document.querySelector("#background").src= "/assets/background.png"
-    let backgroundRef = document.querySelector("#background")
-    backgroundRef.src = "/assets/background.png"
-    backgroundMusic.pause(); // Pausar musiken
-    backgroundMusic.currentTime = 0; // Startar om från början
+    backgroundMusic.pause();
+    backgroundMusic.currentTime = 0;
     let nickRef = document.querySelector("#nick")
     let ageRef = document.querySelector("#age")
     let boyRef = document.querySelector("#boy")
