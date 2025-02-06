@@ -4,10 +4,204 @@
     padding: 0;
 }
 
-/* Ser till så att bilderna får korrekt storlek och deras rörelse animeras */
-/* När ni sätter intervallen efter vilken pokemonen får sin nya position bör den intervallen överensstämma med tiden här. 3s. */
-img {
-    width: 300px;
-    transition: all 3s linear;
+/* Ser till sÃ¥ att bilderna fÃ¥r korrekt storlek och deras rÃ¶relse animeras */
+/* NÃ¤r ni sÃ¤tter intervallen efter vilken pokemonen fÃ¥r sin nya position bÃ¶r den intervallen Ã¶verensstÃ¤mma med tiden hÃ¤r. 3s. */
+.imgbackground {
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    object-fit: cover;
 }
 
+.game-field img {
+    width: 300px;
+    transition: all 3s linear;
+    position: absolute;   
+}
+
+.form-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+#errormsg {
+    position: absolute;
+    z-index: 10;
+    background-color: antiquewhite;
+    padding: 1em;
+    top: 3em;
+    font-family: verdana;
+    border-radius: 2em;
+    color: white;
+    background-color: rgb(221, 59, 51);
+}
+
+
+.form {
+    margin: 0 auto;
+    height: 550px;
+    width: 550px;
+    background: linear-gradient(0deg, rgb(196, 196, 196) 0%, rgb(255, 255, 255) 50%, rgb(221, 59, 51) 50%);
+    border-radius: 50%;
+    border: 6px solid black;
+    padding: 3rem;
+    gap: 1rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.form::before {
+    content: "";
+    position: absolute;      
+    width: 550px;
+    top: 50%;
+    left: 0;
+    height: 40px;    
+    background-color: black;
+  }
+
+.form h1 {
+    font-family: "shantell sans";
+    color: rgb(255, 255, 255); /* FyllningsfÃ¤rg */
+    text-shadow: 
+        -2px -2px 0 rgb(0, 0, 0),  
+         2px -2px 0 rgb(0, 0, 0),  
+        -2px  2px 0 rgb(0, 0, 0),  
+         2px  2px 0 rgb(0, 0, 0); /* Skapar en kontur */
+    font-weight: bold; /* FÃ¶r att gÃ¶ra texten tydligare */
+    font-size: 2.2em;
+    text-align: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-top: 1.6rem;
+}
+
+.form h2 {
+    font-family: "shantell sans";
+    font-size: 1.4em;
+    margin-top: 1rem;
+}
+
+#nick {
+    height: 2rem;
+    margin-right: 0.5rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+#nicktext {
+    margin-bottom: 1rem;
+}
+
+#gender {
+    margin-top: 2rem;
+}
+
+#age {
+    height: 2rem;
+    margin-left: 0.5rem;
+    border: 2px solid black;
+    border-radius: 4px;
+    padding-left: 0.5rem;
+}
+
+#boy {
+    margin-top: 1rem;
+}
+
+.form button {
+    background-color: rgb(255, 236, 66);
+    padding: 1em;
+    font-family: "shantell sans";
+    font-size: 1em;
+    color: rgb(0, 0, 0);
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
+.form-sections {
+    margin: 1em;
+}
+
+.hide {
+    display: none;
+}
+
+
+.high-score {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, rgb(196, 66, 66) 50%, white 50%);
+    padding: 20px;
+    border: 4px solid black;
+    border-radius: 15px;
+    width: 80%;
+    max-width: 400px;
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); /* Justera exakt till mitten */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    font-family: "Shantell Sans", sans-serif;
+    z-index: 1000; /* Hög z-index för att lägga den över allt annat */
+}
+
+.high-score h1{
+    color: #000000;
+    font-size: 2em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    width: 100%;
+
+
+
+}
+.highscore-list{
+
+
+    list-style: none;
+    padding: 0%;
+    margin: 10px 0;
+    width: 100%;
+
+}
+
+.highscore-list li{
+
+
+    background-color: #ffe842;
+    border: 2px solid black;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+
+#playAgainBtn{
+
+    background-color: #4caf50;
+    color: white;
+   padding: 10px 20px;
+   border: none;
+   border-radius: 8px;
+   cursor: pointer;
+   font-size: 1em;
+   margin-top: 15px;
+
+
+}
+
+#playAgainBtn:hover{
+    background-color: #388e3c;
+}

@@ -3,33 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Road+Rage&family=Shantell+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./styles/style.css" />
     <script src="./scripts/oGameData.js"></script>
     <script type="module" src="./scripts/script.js"></script>
+
     <title>Gotta catch 'em all</title>
   </head>
   <body>
     <!-- Detta är koden från mitt exempel, skriv gärna egen HTML om så önskas -->
+    <img src="/assets/background.png" class="imgbackground" id="background">
     <section class="form-wrapper" id="formWrapper">
+      <p class= "hide" id="errormsg"></p>
       <form class="form" id="form">
-        <h1>Welcome young pokemon trainer</h1>
-        <h3>Please enter your name</h2>
-        <input id="nick" type="text" placeholder="Trainer nickname" />
-        <input id="age" type="text" placeholder="Trainer age">
-        <p>Are you a boy? Or are you a girl?</p>
-        <label>
-          <input type="radio" name="gender" id="boy">
-          Boy
-        </label>
-        <label>
-          <input type="radio" name="gender" id="girl">
-          Girl
-        </label>
-        <button id="submitBtn">Let's catch some pokemons!</button>
+        <div class="form-sections">
+          <h1>Welcome young pokemon trainer!</h1>
+        </div>
+        <div class="form-sections">
+          <h2 id="nicktext">Please enter your name and age:</h2> 
+          <input id="nick" type="text" placeholder="Trainer nickname" />
+          <input id="age" type="text" placeholder="Trainer age">
+        </div>  
+        
+        <div class="form-sections">
+          <h2 id="gender">Are you a boy? Or are you a girl?</h2>
+          <label>
+            <input type="radio" name="gender" id="boy">
+            Boy
+          </label>
+          <label>
+            <input type="radio" name="gender" id="girl">
+            Girl
+          </label>
+        </div>
+        <div class="form-sections">
+          <button id="submitBtn">Let's catch some pokemons!</button>
+        </div>  
       </form>
     </section>
-    <section id="gameField" class="game-field d-none">
-        <section class="high-score d-none" id="highScore">
+    <section id="gameField" class="game-field">
+        
+        <section id="pokemonField" class="hide">
+        </section>
+    
+        <section class="high-score d-none hide" id="highScore">
+          <div class="black-band"></div>
             <h1>Congratulations!</h1>
             <h3 id="winMsg"></h3>
             <ol class="highscore-list" id="highscoreList">
@@ -40,6 +60,6 @@
     </section>
     
     <!-- Läs in audioelementet från DOMen. För att spela .play(), för att pausa .pause(), för att starta om .load()  -->
-    <audio src="./assets/pokemon_vs_trainer.mp3"></audio>
+    <audio id="backgroundMusic" src="./assets/pokemon_vs_trainer.mp3"></audio>
   </body>
 </html>
